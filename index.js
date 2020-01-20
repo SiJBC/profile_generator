@@ -5,17 +5,20 @@ const conversion = require("conversion");
 const pdf = require("html-pdf");
 const util = require("util");
 
+
+
+
 function promptUser() {
     return inquirer.prompt([{
         type: "input",
         message: "Enter your Github username;",
         name: "username"
     }, {
-        type: " list",
-        message: " What's your favorite color?",
+        type: "list",
+        message: "What's your favorite color?",
         name: "faveColor",
-        choices: ['red', 'pink', 'green', 'blue']
-    }]);
+        choices: ['red', 'green', 'blue']
+      }]);
 }
 promptUser()
 .then(function({username, faveColor}){
@@ -46,11 +49,12 @@ promptUser()
                   let count = res.data[index].stargazers_count;
                   starCount = starCount + count;
               }
-              console.log("Final star count for all repositories" + starCount)
+              console.log("star count for all repositories " + starCount)
               info.starCount = starCount;
          
          
             })
+            
         })
     })
 

@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/SiJBC/profile_generator/issues"
   },
-  "homepage": "https://github.com/SiJBC/profile_generator#readme"
+  "homepage": "https://github.com/SiJBC/profile_generator#readme",
+  "dependencies": {
+    "axios": "^0.19.1",
+    "conversion": "^1.2.3",
+    "fs": "0.0.1-security",
+    "html-pdf": "^2.2.0",
+    "inquirer": "^7.0.3",
+    "util": "^0.12.1"
+  }
 }

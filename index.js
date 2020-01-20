@@ -64,12 +64,12 @@ promptUser()
                     readyToConvert = true;
 
                     //   
-                    fs.writeFileSync(`${username}.html`, html);
-                    var options = { format: 'landscape' };
-                    pdf.create(html, options).toFile(`${username}.pdf`, function (err, res) {
-                        if (err) return console.log(err);
-                        console.log(res);
-                    });
+                    // fs.writeFileSync(`${username}.html`, html);
+                    // var options = { format: 'landscape' };
+                    // pdf.create(html, options).toFile(`${username}.pdf`, function (err, res) {
+                    //     if (err) return console.log(err);
+                    //     console.log(res);
+                    // });
 
                 });
             });

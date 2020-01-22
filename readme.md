@@ -8,6 +8,8 @@ The application generates a PDF resume from the user provided GitHub profile.
 
 * The background color of the generated PDF matches the color that the user provides.
 
+![screenshot](https://github.com/SiJBC/profile_generator/blob/master/images/screenshot.png "Screenshot")
+
 ```
 GIVEN the developer has a GitHub profile
 
@@ -15,7 +17,7 @@ WHEN prompted for the developer's GitHub username and favorite color
 
 THEN a PDF profile is generated
 
-`![screenshot](https://github.com/SiJBC/profile_generator/blob/master/images/screenshot.png "Screenshot")`
+
 ![screenshot](gif/pgtrim.gif)
 
 

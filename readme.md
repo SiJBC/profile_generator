@@ -15,6 +15,7 @@ WHEN prompted for the developer's GitHub username and favorite color
 
 THEN a PDF profile is generated
 
-![Screenshot](images/screenshot.png)
+![screenshot](images/screenshot.png)
+![screenshot](gif/pgtrim.gif)
 
 

@@ -1,105 +1,4 @@
-const inquirer = require("inquirer");
-const fs = require("fs");
-const util = require("util");
-const axios = require("axios")
-const pdf = require('html-pdf')
 
-
-function promptUser() {
-  return inquirer.prompt([
-    {
-      type: "input",
-      name: "username",
-      message: "Enter your GitHub username:"
-    },
-    {
-      type: "list",
-      message: "What's your favorite color?",
-      name: "faveColor",
-      choices: ['red', 'green','pink', 'blue']
-    }
-  ]);
-}
-
-promptUser()
-.then(function ({username, faveColor}) {
-  const queryUrl = `https://api.github.com/users/${username}`;
-axios
-.get(queryUrl).then(function (res){
-console.log(res)
-info = {
-  color: faveColor,
-          profilePic: res.data.avatar_url,
-          name: res.data.name,
-          location: res.data.location,
-          profileUrl: res.data.html_url,
-          blog: res.data.blog,
-          bio: res.data.bio,
-          company: res.data.company,
-          repos: res.data.public_repos,
-          followers: res.data.followers,
-          following: res.data.following,
-}
-
-console.log(info);
-
-const newQueryUrl = `https://api.github.com/users/${username}/repos`;
-console.log(newQueryUrl);
-axios.get(newQueryUrl).then(function (res) {
-  let starCount = 0;
-  for (let index = 0; index < res.data.length; index++) {
-    let count = res.data[index].stargazers_count;
-    starCount = starCount + count;
-
-  }
-  console.log("Final star count for all repositories: " + starCount)
-          info.starCount = starCount;
-          const html = generateHTML(info);
-
-          console.log(`${username}.pdf is ready in file`);
-          fs.writeFileSync(`${username}.html`, html);
-
-          var options = { format: 'landscape' };
-          pdf.create(html, options).toFile(`${username}.pdf`, function (err, res) {
-            if (err) return console.log(err);
-            console.log(res);
-           
-})
-})
-})
-})
-
-
-function generateHTML(info) {
-  const colors = {
-    green: {
-      wrapperBackground: "green",
-      headerBackground: "#C1C72C",
-      headerColor: "black",
-      photoBorderColor: "#black"
-    },
-    blue: {
-      wrapperBackground: "blue",
-      headerBackground: "#26175A",
-      headerColor: "white",
-      photoBorderColor: "#73448C"
-    },
-    pink: {
-      wrapperBackground: "#879CDF",
-      headerBackground: "#FF8374",
-      headerColor: "white",
-      photoBorderColor: "#FEE24C"
-    },  
-    red: {
-      wrapperBackground: "red",
-      headerBackground: "#870603",
-      headerColor: "white",
-      photoBorderColor: "white"
-    }
-  }
-  
-  
-  return `
   <!DOCTYPE html>
   <html lang="en">
      <head>
@@ -127,7 +26,7 @@ function generateHTML(info) {
            }
            .wrapper {
   
-           background-color: ${colors[info.color].wrapperBackground};
+           background-color: red;
            padding-top: 100px;
            }
            body {
@@ -169,8 +68,8 @@ function generateHTML(info) {
            display: flex;
            justify-content: center;
            flex-wrap: wrap;
-           background-color: ${colors[info.color].headerBackground};
-           color: ${colors[info.color].headerColor};
+           background-color: #870603;
+           color: white;
            padding: 10px;
            width: 95%;
            border-radius: 6px;
@@ -181,7 +80,7 @@ function generateHTML(info) {
            border-radius: 50%;
            object-fit: cover;
            margin-top: -75px;
-           border: 6px solid ${colors[info.color].photoBorderColor};
+           border: 6px solid white;
            box-shadow: rgba(0, 0, 0, 0.3) 4px 1px 20px 4px;
            text-align: center;
            }
@@ -225,8 +124,8 @@ function generateHTML(info) {
            .card {
              padding: 20px;
              border-radius: 6px;
-             background-color: ${colors[info.color].headerBackground};
-             color: ${colors[info.color].headerColor};
+             background-color: #870603;
+             color: white;
              margin: 20px;
            }
            
@@ -251,51 +150,38 @@ function generateHTML(info) {
      <body>
         <div class="wrapper">
            <div class="photo-header">
-              <img class="photo-header img" src="${info.profilePic}" alt="Photo of ${info.name}" />
+              <img class="photo-header img" src="https://avatars2.githubusercontent.com/u/55180479?v=4" alt="Photo of Simon Colman" />
               <h1>Hello!</h1>
               <h2>
-              My name is ${info.name}!</h1>
-              <h5>${info.company ? `Currently @ ${info.company}` : ""}</h5>
+              My name is Simon Colman!</h1>
+              <h5>Currently @ s_colman@hotmail.com </h5>
               <nav class="links-nav">
-                 ${
-    info.location
-      ? `<a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/place/${
-      info.location
-      }"><i class="fas fa-location-arrow"></i> ${
-      info.location
-      }</a>`
-      : ""
-    }
-                 <a class="nav-link" target="_blank" rel="noopener noreferrer" href="${
-    info.profileUrl
-    }"><i class="fab fa-github-alt"></i> GitHub</a>
-                 ${
-    info.blog
-      ? `<a class="nav-link" target="_blank" rel="noopener noreferrer" href="${
-      info.blog
-      }"><i class="fas fa-rss"></i> Blog</a>`
-      : ""
-    }
+                 <a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/place/sydney "><i class="fas fa-location-arrow"></i> sydney </a>
+                 <a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://github.com/SiJBC"><i class="fab fa-github-alt"></i> GitHub</a>
+                 <a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://sijbc.github.io/portfolio2/."><i class="fas fa-rss"></i> Blog</a>
               </nav>
            </div>
            <main>
               <div class="container">
               <div class="row">
                  <div class="col">
-                    <h3>${info.bio ? `${info.bio}` : ""}</h3>
+                    <h3>Hi
+learning to become a full stack developer at trilogy college coding 
+bootcamp.
+Have covered, html, css javascript and basics of node</h3>
                  </div>
                  </div>
                  <div class="row">
                  <div class="col">
                     <div class="card">
                       <h3>Public Repositories</h3>
-                      <h4>${info.repos}</h4>
+                      <h4>16</h4>
                     </div>
                  </div>
                   <div class="col">
                   <div class="card">
                     <h3>Followers</h3>
-                    <h4>${info.followers}</h4>
+                    <h4>3</h4>
                   </div>
                  </div>
                  </div>
@@ -303,13 +189,13 @@ function generateHTML(info) {
                  <div class="col">
                  <div class="card">
                     <h3>GitHub Stars</h3>
-                    <h4>${info.starCount}</h4>
+                    <h4>0</h4>
                     </div>
                  </div>
                   <div class="col">
                   <div class="card">
                     <h3>Following</h3>
-                    <h4>${info.following}</h4>
+                    <h4>3</h4>
                     </div>
                  </div>
                  </div>
@@ -317,24 +203,4 @@ function generateHTML(info) {
            </main>
         </div>
      </body>
-  </html>`;
-}
-
-
-
-// async function init() {
-//   console.log("hi")
-//   try {
-//     const info = await promptUser();
-
-//     const html = generateHTML(info);
-
-//     await writeFileAsync("index.html", html);
-
-//     console.log("Successfully wrote to index.html");
-//   } catch(err) {
-//     console.log(err);
-//   }
-// }
-
-// init();
+  </html>

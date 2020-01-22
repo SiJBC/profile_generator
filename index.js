@@ -16,7 +16,7 @@ function promptUser() {
       type: "list",
       message: "What's your favorite color?",
       name: "faveColor",
-      choices: ['red', 'green', 'blue']
+      choices: ['red', 'green','pink', 'blue']
     }
   ]);
 }
@@ -56,9 +56,15 @@ axios.get(newQueryUrl).then(function (res) {
           info.starCount = starCount;
           const html = generateHTML(info);
 
-          console.log(`${username}.html is ready to convert to PDF`);
+          console.log(`${username}.pdf is ready in file`);
           fs.writeFileSync(`${username}.html`, html);
 
+          var options = { format: 'landscape' };
+          pdf.create(html, options).toFile(`${username}.pdf`, function (err, res) {
+            if (err) return console.log(err);
+            console.log(res);
+           
+})
 })
 })
 })
@@ -78,6 +84,12 @@ function generateHTML(info) {
       headerColor: "white",
       photoBorderColor: "#73448C"
     },
+    pink: {
+      wrapperBackground: "#879CDF",
+      headerBackground: "#FF8374",
+      headerColor: "white",
+      photoBorderColor: "#FEE24C"
+    },  
     red: {
       wrapperBackground: "red",
       headerBackground: "#870603",
@@ -114,11 +126,12 @@ function generateHTML(info) {
            height: 100%;
            }
            .wrapper {
-           background-color: white;
+  
+           background-color: ${colors[info.color].wrapperBackground};
            padding-top: 100px;
            }
            body {
-           background-color: ${colors[info.color].wrapperBackground};
+            background-color: white;
            -webkit-print-color-adjust: exact !important;
            font-family: 'Cabin', sans-serif;
            }
@@ -305,6 +318,8 @@ function generateHTML(info) {
      </body>
   </html>`;
 }
+
+
 
 // async function init() {
 //   console.log("hi")

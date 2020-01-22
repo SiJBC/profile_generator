@@ -1,27 +1,19 @@
 {
-  "name": "profile_generator",
+  "name": "mini-project",
   "version": "1.0.0",
-  "description": "personal profile generator git repository",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SiJBC/profile_generator.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/SiJBC/profile_generator/issues"
-  },
-  "homepage": "https://github.com/SiJBC/profile_generator#readme",
   "dependencies": {
     "axios": "^0.19.1",
-    "conversion": "^1.2.3",
     "fs": "0.0.1-security",
     "html-pdf": "^2.2.0",
-    "inquirer": "^7.0.3",
+    "inquirer": "^6.5.2",
     "util": "^0.12.1"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }

@@ -16,6 +16,8 @@ THEN a PDF profile is generated
 
 ![screenshot](https://github.com/SiJBC/profile_generator/blob/master/images/screenshot.png "Screenshot")
 
+![gif](https://github.com/SiJBC/profile_generator/blob/master/gif/pgtrim.gif "gif")
+
 
 
 

@@ -15,7 +15,7 @@ WHEN prompted for the developer's GitHub username and favorite color
 
 THEN a PDF profile is generated
 
-![screenshot](/images/dayscreenshot.psg)
+![screenshot](/images/screenshot.psg)
 
 
 

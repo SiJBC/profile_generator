@@ -1,5 +1,11 @@
 The application generates a PDF resume from the user provided GitHub profile.
 
+GIVEN the developer has a GitHub profile
+
+WHEN prompted for the developer's GitHub username and favorite color
+
+THEN a PDF profile is generated
+
 * The generated resume includes a bio image from the user's GitHub profile.
 
 * The generated resume includes the user's location and a link to their GitHub profile.
@@ -10,14 +16,9 @@ The application generates a PDF resume from the user provided GitHub profile.
 
 ![screenshot](https://github.com/SiJBC/profile_generator/blob/master/images/screenshot.png "Screenshot")
 
-```
-GIVEN the developer has a GitHub profile
-
-WHEN prompted for the developer's GitHub username and favorite color
-
-THEN a PDF profile is generated
 
 
-![screenshot](gif/pgtrim.gif)
+
+
 
 
